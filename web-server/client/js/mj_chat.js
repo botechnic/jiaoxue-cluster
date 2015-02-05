@@ -9,8 +9,9 @@ document
 					var messageInput = document.getElementById('messageInput'), msg = messageInput.value, color = '#000000';
 					if (e.keyCode == 13 && msg.trim().length != 0) {
 						messageInput.value = '';
-						socket.emit('new message', msg);
-						_displayNewMsg(global_info.userid, msg);
+						//socket.emit('new message', msg);
+						send_message(global_info.course_id, msg, global_info.userid, "*", "chat");
+						//_displayNewMsg(global_info.userid, msg);
 					}
 					;
 				}, false);

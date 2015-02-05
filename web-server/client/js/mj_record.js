@@ -68,52 +68,70 @@ var interval_function1 = function() {
 	mousemove_capture_flag = true;
 };
 
-if (global_info.role === 'teacher') {
-	canvas.addEventListener('mousedown', function(e) {
-		var mouseX = e.pageX - this.offsetLeft;
-		var mouseY = e.pageY - this.offsetTop;
-		mouseX = mouseX * mouse_factor;
-		mouseY = mouseY * mouse_factor;
+function send_mouse_down(e) {
+	var mouseX = e.pageX - this.offsetLeft;
+	var mouseY = e.pageY - this.offsetTop;
+	mouseX = mouseX * mouse_factor;
+	mouseY = mouseY * mouse_factor;
 
-		pp = true;
-		ctx.moveTo(mouseX, mouseY);
-		socket.emit('mousedown', {
+	pp = true;
+	//ctx.moveTo(mouseX, mouseY);
+	/*socket.emit('mousedown', {
+		mouseX : mouseX,
+		mouseY : mouseY
+	});*/
+	var msg;
+	msg = mouseX.toFixed(1)+"|";
+	msg += mouseY.toFixed(1)+"|";
+	msg += "false";
+	send_message(global_info.course_id, msg, global_info.userid, "*", "mousedown");
+
+	e.preventDefault();
+	// start interval
+	interval_handler = setInterval(interval_function1, 40);
+}
+
+function send_mouse_up(e) {
+	pp = false;
+	var msg;
+	msg = 0+"|";
+	msg += 0+"|";
+	msg += ""+pp;
+	/*socket.emit('mouseup', {
+		pp : false
+	});*/
+	send_message(global_info.course_id, msg, global_info.userid, "*", "mouseup");
+
+	clearInterval(interval_handler);
+	interval_handler = null;
+}
+
+function send_mouse_move(e) {
+	var mouseX = e.pageX - this.offsetLeft;
+	var mouseY = e.pageY - this.offsetTop;
+	mouseX = mouseX * mouse_factor;
+	mouseY = mouseY * mouse_factor;
+
+	if (pp == true && mousemove_capture_flag == true) {
+		//ctx.lineTo(mouseX, mouseY);
+		/*socket.emit('mousemove', {
 			mouseX : mouseX,
-			mouseY : mouseY
-		});
+			mouseY : mouseY,
+			pp : pp
+		});*/
+		var msg;
+		msg = mouseX.toFixed(1)+"|";
+		msg += mouseY.toFixed(1)+"|";
+		msg += ""+pp;
+		send_message(global_info.course_id, msg, global_info.userid, "*", "mousemove");
+		//ctx.stroke();
 
-		e.preventDefault();
-		// start interval
-		interval_handler = setInterval(interval_function1, 40);
+		mousemove_capture_flag = false;
+	}
+}
 
-	});
-
-	canvas.addEventListener('mouseup', function(e) {
-		pp = false;
-		socket.emit('mouseup', {
-			pp : false
-		});
-
-		clearInterval(interval_handler);
-		interval_handler = null;
-	});
-
-	canvas.addEventListener('mousemove', function(e) {
-		var mouseX = e.pageX - this.offsetLeft;
-		var mouseY = e.pageY - this.offsetTop;
-		mouseX = mouseX * mouse_factor;
-		mouseY = mouseY * mouse_factor;
-		if (pp == true && mousemove_capture_flag == true) {
-			ctx.lineTo(mouseX, mouseY);
-			socket.emit('mousemove', {
-				mouseX : mouseX,
-				mouseY : mouseY,
-				pp : pp
-			});
-			ctx.stroke();
-
-			mousemove_capture_flag = false;
-		}
-	});
-
+if (global_info.role === 'teacher') {
+	canvas.addEventListener('mousedown', send_mouse_down);
+	canvas.addEventListener('mouseup', send_mouse_up);
+	canvas.addEventListener('mousemove', send_mouse_move);
 }

@@ -50,11 +50,13 @@ function onPrevPage() {
 		return;
 	}
 	pageNum--;
-	queueRenderPage(pageNum);
+	//queueRenderPage(pageNum);
 	if (global_info.role === 'teacher') {
-		socket.emit('prev', {
+		/*socket.emit('prev', {
 			pageNum : pageNum
-		});
+		});*/
+
+		send_message(global_info.course_id, ""+pageNum, global_info.userid, "*", "prev");
 	}
 }
 
@@ -63,11 +65,12 @@ function onNextPage() {
 		return;
 	}
 	pageNum++;
-	queueRenderPage(pageNum);
+	//queueRenderPage(pageNum);
 	if (global_info.role === 'teacher') {
-		socket.emit('next', {
+		/*socket.emit('next', {
 			pageNum : pageNum
-		});
+		});*/
+		send_message(global_info.course_id, ""+pageNum, global_info.userid, "*", "next");
 	}
 }
 

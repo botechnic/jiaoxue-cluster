@@ -25,7 +25,8 @@ handler.send = function(msg, session, next) {
 	var param = {
 		msg: msg.content,
 		from: username,
-		target: msg.target
+		target: msg.target,
+		cmd: msg.cmd
 	};
 	channel = channelService.getChannel(rid, false);
 

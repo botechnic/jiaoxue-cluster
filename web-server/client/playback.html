@@ -18,7 +18,7 @@
         global_info.live_addr = 'rtmp://119.80.57.9:1935/live';
         global_info.publish_addr = 'rtmp://119.80.57.9:1935/live';
         global_info.playback_addr = 'http://pano.botechnic.com:82/data/4/4_2.mp4';
-        global_info.socketio_addr = 'http://pano.botechnic.com:82';
+        global_info.socketio_addr = 'http://pano.botechnic.com:81';
     </script>
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -29,6 +29,11 @@
     <script type="text/javascript" src="js/srs.player.js"></script>
     <script type="text/javascript" src="js/srs.utility.js"></script>
     <script type="text/javascript" src="js/mj_ajax.js"></script>
+    <script src="lib/build/build.js" type="text/javascript"></script>
+    <script type="text/javascript">
+         require('boot');
+    </script>
+    <script type="text/javascript" src="js/mj_pomelo_control.js"></script>
 </head>
 
 <body id ="teacher_body" style="visibility:hidden;z-index:20001;">

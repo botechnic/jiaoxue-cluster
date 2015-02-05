@@ -51,35 +51,35 @@ socket.on('user number change', function(data) {
 
 socket.on('new message', function(data) {
 	console.log('new message');
-	_displayNewMsg(data.username, data.message);
+	//_displayNewMsg(data.username, data.message);
 });
 
-socket.on('prev', function(e) {
+function prev_handler(e) {
 	console.log('prev', e.pageNum);
 	var pageNum = e.pageNum;
 	queueRenderPage(pageNum);
-});
+}
 
-socket.on('next', function(e) {
+function next_handler(e) {
 	console.log('next', e.pageNum);
 	var pageNum = e.pageNum;
 	queueRenderPage(pageNum);
-});
+}
 
-socket.on('mousedown', function(e) {
+function mousedown_handler(e) {
 	console.log('mousedown');
 	pp = true;
 	var mouseX = e.mouseX;
 	var mouseY = e.mouseY;
 	ctx.moveTo(mouseX, mouseY);
-});
+}
 
-socket.on('mouseup', function(e) {
+function mouseup_handler(e) {
 	console.log('mouseup');
 	pp = e.pp;
-});
+}
 
-socket.on('mousemove', function(e) {
+function mousemove_handler(e) {
 	console.log('mousemove');
 	var mouseX = e.mouseX;
 	var mouseY = e.mouseY;
@@ -88,6 +88,12 @@ socket.on('mousemove', function(e) {
 		ctx.lineTo(mouseX, mouseY);
 		ctx.stroke();
 	}
-});
+}
+
+socket.on('prev', prev_handler);
+socket.on('next', next_handler);
+socket.on('mousedown', mousedown_handler);
+socket.on('mouseup', mouseup_handler);
+socket.on('mousemove', mousemove_handler);
 
 
