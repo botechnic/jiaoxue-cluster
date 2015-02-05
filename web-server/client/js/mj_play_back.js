@@ -9,7 +9,7 @@ var is_pause = true;
 var usernames = {};
 var user_obj = {};
 user_obj.username = 's1';
-user_obj.socket = socket;
+//user_obj.socket = socket;
 user_obj.course_id = 0;
 user_obj.is_pause = false;
 user_obj.role = 'student';
@@ -422,7 +422,7 @@ function readFile(file, cb) {
     createRequest();
 }
 
-var control_stop_playback = function(data, socket) {
+/*var control_stop_playback = function(data, socket) {
 
     console.log('stop_playback', data);
     var user_obj = socket.user_obj;
@@ -437,7 +437,7 @@ var control_stop_playback = function(data, socket) {
     user_obj.playback_index1 = 0;
     user_obj.curr_ms = 0;
 
-}
+}*/
 
 var control_pause_resume_playback = function(is_pause, user_obj) {
 

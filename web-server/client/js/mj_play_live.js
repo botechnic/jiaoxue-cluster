@@ -38,9 +38,9 @@ MJ.live.prototype.start_playlive = function () {
 
 	this.play_live();
 
-	socket.emit('start_playlive', {
+	/*socket.emit('start_playlive', {
 		course_id : course_id
-	});
+	});*/
 }
 
 MJ.live.prototype.stop_playlive = function () {
@@ -48,7 +48,7 @@ MJ.live.prototype.stop_playlive = function () {
 
 	this.stop_live();
 
-	socket.emit('stop_playlive', {
+	/*socket.emit('stop_playlive', {
 		course_id : course_id
-	});
+	});*/
 }

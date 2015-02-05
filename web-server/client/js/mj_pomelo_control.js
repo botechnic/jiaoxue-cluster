@@ -4,6 +4,8 @@ var LENGTH_ERROR = "Name/Channel is too long or too short. 20 character max.";
 var NAME_ERROR = "Bad character in Name/Channel. Can only have letters, numbers, Chinese characters, and '_'";
 var DUPLICATE_ERROR = "Please change your name to login.";
 
+var users = {};
+
 $(document).ready(function() {
     console.log("jquery ready");
     var uid_ = global_info.userid;
@@ -48,7 +50,7 @@ function message_bind() {
 
         switch(data.cmd) {
         case "chat":
-        	_displayNewMsg(global_info.userid, data.msg);
+        	_displayNewMsg(data.from, data.msg);
         	break;
         case "prev":
             var e = {};
@@ -106,11 +108,15 @@ function message_bind() {
 	//update user list
 	pomelo.on('onAdd', function(data) {
 		console.log("onAdd", data);
+		users[data.user] = data.user;
+		user_number_handler(Object.keys(users).length);
 	});
 
 	//update user list
 	pomelo.on('onLeave', function(data) {
 		console.log("onLeave", data);
+		delete users[data.user];
+		user_number_handler(Object.keys(users).length);
 	});
 
 	//handle disconect message, occours when the client is disconnect with servers
@@ -137,8 +143,15 @@ function connect_connector(host, port, rid) {
                 console.log(DUPLICATE_ERROR);
                 return;
             }
+            for(var i=0;i<data.users.length;i++) {
+                users[data.users[i]] = data.users[i];
+            }
+            console.log("enter room", data);
+            user_number_handler(Object.keys(users).length);
 
-           console.log("enter room");
+            if (global_info.biz_type === 'live' || global_info.biz_type === 'record') {
+            		mj_live.start_playlive();
+            }
         });
     });
 }

@@ -1,13 +1,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 // login part
 // 
-var username;
-var connected = false;
-var pp = false;
+//var username;
+//var connected = false;
 
-var socket = io.connect(global_info.socketio_addr);
 
-function set_user_name() {
+//var socket = io.connect(global_info.socketio_addr);
+
+/*function set_user_name() {
 	if (username) {
 		if (global_info.role === 'teacher') {
 			socket.emit('add user', {
@@ -27,9 +27,9 @@ function add_user() {
 	var username_ = global_info.userid;
 	username = username_;
 	set_user_name();
-}
+}*/
 
-socket.on('connect', function() {
+/*socket.on('connect', function() {
 	console.log('connected');
 
 	add_user();
@@ -37,22 +37,29 @@ socket.on('connect', function() {
 	if (global_info.biz_type === 'live' || global_info.biz_type === 'record') {
 		mj_live.start_playlive();
 	}
-});
+});*/
 
-socket.on('login', function(data) {
+/*socket.on('login', function(data) {
 	connected = true;
-});
+});*/
 
-socket.on('user number change', function(data) {
+/*socket.on('user number change', function(data) {
 	var numUsers = data.numUsers;
 	console.log('user number change', data);
 	document.getElementById('number_users').textContent = numUsers;
-});
+});*/
 
-socket.on('new message', function(data) {
+/*socket.on('new message', function(data) {
 	console.log('new message');
 	//_displayNewMsg(data.username, data.message);
-});
+});*/
+
+var pp = false;
+
+function user_number_handler(user_number) {
+	console.log('user number change', user_number);
+	document.getElementById('number_users').textContent = user_number;
+}
 
 function prev_handler(e) {
 	console.log('prev', e.pageNum);
@@ -90,10 +97,10 @@ function mousemove_handler(e) {
 	}
 }
 
-socket.on('prev', prev_handler);
+/*socket.on('prev', prev_handler);
 socket.on('next', next_handler);
 socket.on('mousedown', mousedown_handler);
 socket.on('mouseup', mouseup_handler);
-socket.on('mousemove', mousemove_handler);
+socket.on('mousemove', mousemove_handler);*/
 
 

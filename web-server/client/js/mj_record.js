@@ -10,23 +10,23 @@ function start_record() {
 	console.log('start_record');
 	// var course_id = parseInt(document.getElementById('course_id').value);
 	var course_id = global_info.course_id;
-	socket.emit('start_record', {
+	/*socket.emit('start_record', {
 		record : true,
 		course_id : course_id
 	});
 	socket.emit('next', {
 		pageNum : pageNum
-	});
+	});*/
 }
 
 function stop_record() {
 	console.log('stop_record');
 
-	if (socket) {
+	/*if (socket) {
 		socket.emit('stop_record', {
 			record : false
 		});
-	}
+	}*/
 }
 
 function start_stop_record() {
@@ -38,22 +38,22 @@ function start_stop_record() {
 		pageNum = 1;
 		console.log('start_record');
 		var course_id = global_info.course_id;
-		socket.emit('start_record', {
+		/*socket.emit('start_record', {
 			record : true,
 			course_id : course_id
 		});
 		socket.emit('next', {
 			pageNum : pageNum
-		});
+		});*/
 	} else {
 		start_stop_record.src = 'img/start_record.png';
 		is_record = false;
 		console.log('stop_record');
-		if (socket) {
+		/*if (socket) {
 			socket.emit('stop_record', {
 				record : false
 			});
-		}
+		}*/
 	}
 }
 
