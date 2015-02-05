@@ -17,5 +17,8 @@ pomelo start
 cd web-server
 node app.js
 ```
-
+## 测试
+```
+浏览器中： http://127.0.0.1:3001
+```
 # 配置
