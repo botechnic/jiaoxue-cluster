@@ -1,4 +1,5 @@
 var chatRemote = require('../remote/chatRemote');
+//var mj_record = require('./mj_record');
 
 module.exports = function(app) {
 	return new Handler(app);
@@ -50,6 +51,9 @@ handler.send = function(msg, session, next) {
     			sid: tsid
     		}]);
     	}
+
+    	record_data_0();
+        record_data_1();
 	}
 
 	next(null, {
@@ -59,8 +63,40 @@ handler.send = function(msg, session, next) {
 
 function record_start() {
 	console.log('record_start');
+	//mj_record.control_start_record();
+	record_data_0_start();
+	record_data_1_start();
+	record_data_2_start();
 }
 
 function record_stop() {
 	console.log('record_stop');
+	//mj_record.control_stop_record();
+	record_data_2_stop();
+	record_data_1_stop();
+	record_data_0_stop();
+}
+
+function record_data_0_start() {
+}
+
+function record_data_0_stop() {
+}
+
+function record_data_0() {
+}
+
+function record_data_1_start() {
+}
+
+function record_data_1_stop() {
+}
+
+function record_data_1() {
+}
+
+function record_data_2_start() {
+}
+
+function record_data_2_stop() {
 }
