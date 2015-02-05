@@ -4,30 +4,7 @@
 
 var is_record = false;
 
-function start_record() {
-	pageNum = 1;
-	// renderPage(pageNum);
-	console.log('start_record');
-	// var course_id = parseInt(document.getElementById('course_id').value);
-	var course_id = global_info.course_id;
-	/*socket.emit('start_record', {
-		record : true,
-		course_id : course_id
-	});
-	socket.emit('next', {
-		pageNum : pageNum
-	});*/
-}
 
-function stop_record() {
-	console.log('stop_record');
-
-	/*if (socket) {
-		socket.emit('stop_record', {
-			record : false
-		});
-	}*/
-}
 
 function start_stop_record() {
 	var start_stop_record = document.getElementById('start_stop_record');
@@ -45,6 +22,7 @@ function start_stop_record() {
 		socket.emit('next', {
 			pageNum : pageNum
 		});*/
+		send_message(global_info.course_id, "true", global_info.userid, "*", "record");
 	} else {
 		start_stop_record.src = 'img/start_record.png';
 		is_record = false;
@@ -54,6 +32,7 @@ function start_stop_record() {
 				record : false
 			});
 		}*/
+		send_message(global_info.course_id, "false", global_info.userid, "*", "record");
 	}
 }
 
