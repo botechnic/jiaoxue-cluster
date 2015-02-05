@@ -12,13 +12,15 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-	app.use(express.static(__dirname + '/public'));
+	//app.use(express.static(__dirname + '/public'));
+	app.use(express.static(__dirname + '/client'));
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
 	var oneYear = 31557600000;
-	app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
+	//app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
+	app.use(express.static(__dirname + '/client', { maxAge: oneYear }));
 	app.use(express.errorHandler());
 });
 
