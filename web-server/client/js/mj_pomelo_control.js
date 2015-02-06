@@ -16,7 +16,8 @@ $(document).ready(function() {
 
         message_bind();
 
-        connect_connector(ip, port, room_);
+        //connect_connector(ip, port, room_);
+        connect_connector('pano.botechnic.com', port, room_);
     })
 });
 

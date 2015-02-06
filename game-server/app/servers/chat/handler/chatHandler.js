@@ -31,6 +31,9 @@ handler.send = function(msg, session, next) {
 	};
 	channel = channelService.getChannel(rid, false);
 
+	console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+	test_session(this.app, msg, username);
+
 	if(msg.cmd === 'record') {
 		if(msg.content === 'true') {
 			record_start();
@@ -60,6 +63,12 @@ handler.send = function(msg, session, next) {
 		route: msg.route
 	});
 };
+
+function test_session(app, msg, username) {
+	var prev_msg = app.get(username);
+	console.log('prev_msg:', prev_msg);
+	app.set(username, msg);
+}
 
 function record_start() {
 	console.log('record_start');
