@@ -1,3 +1,5 @@
+var fs = require("fs");
+
 module.exports = function(app) {
 	return new ChatRemote(app);
 };
@@ -72,6 +74,31 @@ ChatRemote.prototype.kick = function(uid, sid, name, cb) {
 		route: 'onLeave',
 		user: username
 	};
+	/*console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+	var prev_msg = this.app.get(username);
+    console.log('prev_msg:', prev_msg);*/
+
+    var user_info = this.app.get(username);
+    if(user_info !== undefined && user_info.is_recording) {
+    	if(user_info.fd0 !== undefined) {
+    		fs.close(user_info.fd0, function() {
+					console.log('Done');
+			});
+    	}
+
+		if(user_info.fd1 !== undefined) {
+			fs.close(user_info.fd1, function() {
+				console.log('Done');
+			});
+		}
+
+
+        var ffmpeg_process = user_info.ffmpeg_process;
+        if(ffmpeg_process !== undefined) {
+        	ffmpeg_process.kill('SIGTERM');
+        }
+    }
+
 	channel.pushMessage(param);
 	cb();
 };

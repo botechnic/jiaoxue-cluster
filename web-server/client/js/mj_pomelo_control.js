@@ -54,53 +54,19 @@ function message_bind() {
         	_displayNewMsg(data.from, data.msg);
         	break;
         case "prev":
-            var e = {};
-            e.pageNum = parseInt(data.msg);
-            prev_handler(e);
+            prev_handler(data.msg);
             break;
         case "next":
-            var e = {};
-            e.pageNum = parseInt(data.msg);
-            next_handler(e);
+            next_handler(data.msg);
             break;
         case "mousemove":
-            var e = {};
-            var drawinfo = data.msg.split("|");
-            e.mouseX = parseInt(drawinfo[0]);
-            e.mouseY = parseInt(drawinfo[1]);
-            e.pp;
-            if(drawinfo[2] === "true") {
-                e.pp = true;
-            } else {
-                e.pp = false;
-            }
-            mousemove_handler(e);
+            mousemove_handler(data.msg);
             break;
         case "mouseup":
-            var e = {};
-            var drawinfo = data.msg.split("|");
-            e.mouseX = parseInt(drawinfo[0]);
-            e.mouseY = parseInt(drawinfo[1]);
-            e.pp;
-            if(drawinfo[2] === "true") {
-                e.pp = true;
-            } else {
-                e.pp = false;
-            }
-            mouseup_handler(e);
+            mouseup_handler(data.msg);
             break;
         case "mousedown":
-            var e = {};
-            var drawinfo = data.msg.split("|");
-            e.mouseX = parseInt(drawinfo[0]);
-            e.mouseY = parseInt(drawinfo[1]);
-            e.pp;
-            if(drawinfo[2] === "true") {
-                e.pp = true;
-            } else {
-                e.pp = false;
-            }
-            mousedown_handler(e);
+            mousedown_handler(data.msg);
             break;
         }
 

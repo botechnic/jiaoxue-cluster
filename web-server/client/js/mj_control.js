@@ -61,33 +61,67 @@ function user_number_handler(user_number) {
 	document.getElementById('number_users').textContent = user_number;
 }
 
-function prev_handler(e) {
+function prev_handler(msg) {
+	var e = {};
+	e.pageNum = parseInt(msg);
 	console.log('prev', e.pageNum);
 	var pageNum = e.pageNum;
 	queueRenderPage(pageNum);
 }
 
-function next_handler(e) {
+function next_handler(msg) {
+	var e = {};
+	e.pageNum = parseInt(msg);
 	console.log('next', e.pageNum);
 	var pageNum = e.pageNum;
 	queueRenderPage(pageNum);
 }
 
-function mousedown_handler(e) {
+function mousedown_handler(msg) {
 	console.log('mousedown');
+	var e = {};
+	var drawinfo = msg.split("|");
+	e.mouseX = parseInt(drawinfo[0]);
+	e.mouseY = parseInt(drawinfo[1]);
+	e.pp;
+	if(drawinfo[2] === "true") {
+		e.pp = true;
+	} else {
+		e.pp = false;
+	}
 	pp = true;
 	var mouseX = e.mouseX;
 	var mouseY = e.mouseY;
 	ctx.moveTo(mouseX, mouseY);
 }
 
-function mouseup_handler(e) {
+function mouseup_handler(msg) {
 	console.log('mouseup');
+	var e = {};
+	var drawinfo = msg.split("|");
+	e.mouseX = parseInt(drawinfo[0]);
+	e.mouseY = parseInt(drawinfo[1]);
+	e.pp;
+	if(drawinfo[2] === "true") {
+		e.pp = true;
+	} else {
+		e.pp = false;
+	}
 	pp = e.pp;
 }
 
-function mousemove_handler(e) {
+function mousemove_handler(msg) {
 	console.log('mousemove');
+	var e = {};
+	var drawinfo = msg.split("|");
+	e.mouseX = parseInt(drawinfo[0]);
+	e.mouseY = parseInt(drawinfo[1]);
+	e.pp;
+	if(drawinfo[2] === "true") {
+		e.pp = true;
+	} else {
+		e.pp = false;
+	}
 	var mouseX = e.mouseX;
 	var mouseY = e.mouseY;
 	pp = e.pp;
@@ -96,6 +130,7 @@ function mousemove_handler(e) {
 		ctx.stroke();
 	}
 }
+
 
 /*socket.on('prev', prev_handler);
 socket.on('next', next_handler);

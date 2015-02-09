@@ -1,0 +1,808 @@
+[
+  {
+    "type": "next",
+    "ts": 11,
+    "data": {
+      "pageNum": 1
+    }
+  },
+  {
+    "type": "mousedown",
+    "ts": 2926,
+    "data": {
+      "mouseX": 738.5218855218856,
+      "mouseY": 358.6296296296297
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 2960,
+    "data": {
+      "mouseX": 738.5218855218856,
+      "mouseY": 362.8821548821549,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 2974,
+    "data": {
+      "mouseX": 738.5218855218856,
+      "mouseY": 375.63973063973066,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 3054,
+    "data": {
+      "mouseX": 738.5218855218856,
+      "mouseY": 408.24242424242425,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 3094,
+    "data": {
+      "mouseX": 748.4444444444445,
+      "mouseY": 493.29292929292933,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 3134,
+    "data": {
+      "mouseX": 751.2794612794613,
+      "mouseY": 532.983164983165,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 3175,
+    "data": {
+      "mouseX": 754.1144781144782,
+      "mouseY": 584.013468013468,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 3221,
+    "data": {
+      "mouseX": 762.6195286195286,
+      "mouseY": 657.7239057239058,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 3264,
+    "data": {
+      "mouseX": 771.1245791245792,
+      "mouseY": 720.0942760942761,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 3302,
+    "data": {
+      "mouseX": 771.1245791245792,
+      "mouseY": 778.2121212121212,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 3341,
+    "data": {
+      "mouseX": 771.1245791245792,
+      "mouseY": 817.9023569023569,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 3382,
+    "data": {
+      "mouseX": 771.1245791245792,
+      "mouseY": 824.9898989898991,
+      "pp": true
+    }
+  },
+  {
+    "type": "mouseup",
+    "ts": 3414,
+    "data": {
+      "pp": false
+    }
+  },
+  {
+    "type": "next",
+    "ts": 7358,
+    "data": {
+      "pageNum": 2
+    }
+  },
+  {
+    "type": "mousedown",
+    "ts": 7870,
+    "data": {
+      "mouseX": 586.8484848484849,
+      "mouseY": 578.3434343434344
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 7918,
+    "data": {
+      "mouseX": 595.3535353535354,
+      "mouseY": 572.6734006734007,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 7965,
+    "data": {
+      "mouseX": 643.5488215488216,
+      "mouseY": 557.0808080808081,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8002,
+    "data": {
+      "mouseX": 735.6868686868687,
+      "mouseY": 545.7407407407408,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8050,
+    "data": {
+      "mouseX": 764.0370370370371,
+      "mouseY": 557.0808080808081,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8088,
+    "data": {
+      "mouseX": 764.0370370370371,
+      "mouseY": 593.936026936027,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8125,
+    "data": {
+      "mouseX": 752.6969696969697,
+      "mouseY": 626.5387205387206,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8173,
+    "data": {
+      "mouseX": 725.7643097643098,
+      "mouseY": 661.9764309764311,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8237,
+    "data": {
+      "mouseX": 717.2592592592594,
+      "mouseY": 676.1515151515152,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8266,
+    "data": {
+      "mouseX": 717.2592592592594,
+      "mouseY": 677.5690235690237,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8295,
+    "data": {
+      "mouseX": 717.2592592592594,
+      "mouseY": 687.4915824915826,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8334,
+    "data": {
+      "mouseX": 728.5993265993267,
+      "mouseY": 693.1616161616162,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8375,
+    "data": {
+      "mouseX": 772.5420875420876,
+      "mouseY": 693.1616161616162,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8422,
+    "data": {
+      "mouseX": 871.7676767676768,
+      "mouseY": 686.0740740740741,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 8462,
+    "data": {
+      "mouseX": 917.1279461279462,
+      "mouseY": 678.986531986532,
+      "pp": true
+    }
+  },
+  {
+    "type": "mouseup",
+    "ts": 8526,
+    "data": {
+      "pp": false
+    }
+  },
+  {
+    "type": "next",
+    "ts": 11638,
+    "data": {
+      "pageNum": 3
+    }
+  },
+  {
+    "type": "mousedown",
+    "ts": 12357,
+    "data": {
+      "mouseX": 525.895622895623,
+      "mouseY": 462.10774410774417
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12389,
+    "data": {
+      "mouseX": 528.7306397306397,
+      "mouseY": 459.2727272727273,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12409,
+    "data": {
+      "mouseX": 569.8383838383838,
+      "mouseY": 459.2727272727273,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12445,
+    "data": {
+      "mouseX": 708.7542087542088,
+      "mouseY": 459.2727272727273,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12487,
+    "data": {
+      "mouseX": 769.7070707070708,
+      "mouseY": 474.8653198653199,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12525,
+    "data": {
+      "mouseX": 765.4545454545455,
+      "mouseY": 507.4680134680135,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12566,
+    "data": {
+      "mouseX": 703.0841750841752,
+      "mouseY": 549.993265993266,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12607,
+    "data": {
+      "mouseX": 643.5488215488216,
+      "mouseY": 609.5286195286195,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12710,
+    "data": {
+      "mouseX": 650.6363636363636,
+      "mouseY": 613.7811447811448,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12735,
+    "data": {
+      "mouseX": 782.4646464646465,
+      "mouseY": 605.2760942760943,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12773,
+    "data": {
+      "mouseX": 830.6599326599327,
+      "mouseY": 615.1986531986532,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12813,
+    "data": {
+      "mouseX": 813.6498316498318,
+      "mouseY": 659.1414141414142,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12853,
+    "data": {
+      "mouseX": 749.8619528619529,
+      "mouseY": 693.1616161616162,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 12896,
+    "data": {
+      "mouseX": 707.3367003367003,
+      "mouseY": 708.7542087542088,
+      "pp": true
+    }
+  },
+  {
+    "type": "mouseup",
+    "ts": 12957,
+    "data": {
+      "pp": false
+    }
+  },
+  {
+    "type": "next",
+    "ts": 15933,
+    "data": {
+      "pageNum": 4
+    }
+  },
+  {
+    "type": "mousedown",
+    "ts": 16613,
+    "data": {
+      "mouseX": 730.0168350168351,
+      "mouseY": 352.95959595959596
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 16645,
+    "data": {
+      "mouseX": 728.5993265993267,
+      "mouseY": 357.21212121212125,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 16661,
+    "data": {
+      "mouseX": 727.1818181818182,
+      "mouseY": 364.29966329966334,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 16701,
+    "data": {
+      "mouseX": 710.1717171717172,
+      "mouseY": 405.40740740740745,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 16742,
+    "data": {
+      "mouseX": 691.7441077441077,
+      "mouseY": 463.52525252525254,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 16781,
+    "data": {
+      "mouseX": 673.3164983164984,
+      "mouseY": 507.4680134680135,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 16821,
+    "data": {
+      "mouseX": 664.8114478114478,
+      "mouseY": 541.4882154882155,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 16862,
+    "data": {
+      "mouseX": 652.053872053872,
+      "mouseY": 586.8484848484849,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 16917,
+    "data": {
+      "mouseX": 647.8013468013469,
+      "mouseY": 606.6936026936028,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 16947,
+    "data": {
+      "mouseX": 647.8013468013469,
+      "mouseY": 610.946127946128,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17001,
+    "data": {
+      "mouseX": 649.2188552188553,
+      "mouseY": 620.868686868687,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17033,
+    "data": {
+      "mouseX": 694.5791245791246,
+      "mouseY": 644.96632996633,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17074,
+    "data": {
+      "mouseX": 816.4848484848485,
+      "mouseY": 647.8013468013469,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17119,
+    "data": {
+      "mouseX": 908.6228956228957,
+      "mouseY": 635.0437710437711,
+      "pp": true
+    }
+  },
+  {
+    "type": "mouseup",
+    "ts": 17205,
+    "data": {
+      "pp": false
+    }
+  },
+  {
+    "type": "mousedown",
+    "ts": 17509,
+    "data": {
+      "mouseX": 764.0370370370371,
+      "mouseY": 455.0202020202021
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17535,
+    "data": {
+      "mouseX": 764.0370370370371,
+      "mouseY": 456.43771043771045,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17553,
+    "data": {
+      "mouseX": 759.7845117845119,
+      "mouseY": 477.7003367003367,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17597,
+    "data": {
+      "mouseX": 755.5319865319866,
+      "mouseY": 598.1885521885522,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17638,
+    "data": {
+      "mouseX": 755.5319865319866,
+      "mouseY": 727.1818181818182,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17684,
+    "data": {
+      "mouseX": 748.4444444444445,
+      "mouseY": 805.1447811447812,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 17733,
+    "data": {
+      "mouseX": 741.3569023569024,
+      "mouseY": 857.5925925925926,
+      "pp": true
+    }
+  },
+  {
+    "type": "mouseup",
+    "ts": 17757,
+    "data": {
+      "pp": false
+    }
+  },
+  {
+    "type": "next",
+    "ts": 21077,
+    "data": {
+      "pageNum": 5
+    }
+  },
+  {
+    "type": "mousedown",
+    "ts": 21856,
+    "data": {
+      "mouseX": 846.2525252525253,
+      "mouseY": 361.4646464646465
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 21901,
+    "data": {
+      "mouseX": 846.2525252525253,
+      "mouseY": 368.55218855218857,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 21940,
+    "data": {
+      "mouseX": 846.2525252525253,
+      "mouseY": 412.49494949494954,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 21983,
+    "data": {
+      "mouseX": 846.2525252525253,
+      "mouseY": 462.10774410774417,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22021,
+    "data": {
+      "mouseX": 846.2525252525253,
+      "mouseY": 480.5353535353536,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22065,
+    "data": {
+      "mouseX": 849.0875420875421,
+      "mouseY": 494.71043771043776,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22101,
+    "data": {
+      "mouseX": 893.0303030303031,
+      "mouseY": 523.0606060606061,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22154,
+    "data": {
+      "mouseX": 973.8282828282829,
+      "mouseY": 541.4882154882155,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22184,
+    "data": {
+      "mouseX": 1000.7609427609428,
+      "mouseY": 557.0808080808081,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22229,
+    "data": {
+      "mouseX": 1006.4309764309766,
+      "mouseY": 601.023569023569,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22270,
+    "data": {
+      "mouseX": 1006.4309764309766,
+      "mouseY": 639.2962962962963,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22308,
+    "data": {
+      "mouseX": 958.2356902356903,
+      "mouseY": 684.6565656565657,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22352,
+    "data": {
+      "mouseX": 885.942760942761,
+      "mouseY": 711.5892255892256,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22430,
+    "data": {
+      "mouseX": 876.0202020202021,
+      "mouseY": 711.5892255892256,
+      "pp": true
+    }
+  },
+  {
+    "type": "mouseup",
+    "ts": 22430,
+    "data": {
+      "pp": false
+    }
+  },
+  {
+    "type": "mousedown",
+    "ts": 22861,
+    "data": {
+      "mouseX": 840.5824915824917,
+      "mouseY": 438.01010101010104
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22909,
+    "data": {
+      "mouseX": 843.4175084175084,
+      "mouseY": 438.01010101010104,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22951,
+    "data": {
+      "mouseX": 874.6026936026936,
+      "mouseY": 429.5050505050505,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 22989,
+    "data": {
+      "mouseX": 979.4983164983165,
+      "mouseY": 419.5824915824916,
+      "pp": true
+    }
+  },
+  {
+    "type": "mousemove",
+    "ts": 23029,
+    "data": {
+      "mouseX": 1084.3939393939395,
+      "mouseY": 418.1649831649832,
+      "pp": true
+    }
+  },
+  {
+    "type": "mouseup",
+    "ts": 23101,
+    "data": {
+      "pp": false
+    }
+  }
+]

@@ -229,14 +229,26 @@ MJ.playback.prototype.start_playback_server = function (usernames){
                 for (; user_obj.playback_index < user_obj.playback_data.length; user_obj.playback_index++) {
                     var data_ = user_obj.playback_data[user_obj.playback_index];
 
+                    var data_temp = data_.split(':');
+
                     // console.log(data_.ts, user_obj.curr_ms);
-                    if (data_.ts <= user_obj.curr_ms) {
-                        switch (data_.type){
-                            case 'next': next(data_.data);break;
-                            case 'prev': prev(data_.data);break;
-                            case 'mousemove': mousemove(data_.data);break;
-                            case 'mousedown': mousedown(data_.data);break;
-                            case 'mouseup': mouseup(data_.data);break;
+                    if (data_temp[1] <= user_obj.curr_ms) {
+                        switch (data_temp[0]){
+                            case "prev":
+                                prev_handler(data_temp[2]);
+                                break;
+                            case "next":
+                                next_handler(data_temp[2]);
+                                break;
+                            case "mousemove":
+                                mousemove_handler(data_temp[2]);
+                                break;
+                            case "mouseup":
+                                mouseup_handler(data_temp[2]);
+                                break;
+                            case "mousedown":
+                                mousedown_handler(data_temp[2]);
+                                break;
                         }
 //                        user_obj.socket.emit(data_.type, data_.data);
                     } else {
@@ -246,10 +258,11 @@ MJ.playback.prototype.start_playback_server = function (usernames){
 
                 for (; user_obj.playback_index1 < user_obj.playback_data1.length; user_obj.playback_index1++) {
                     var data1_ = user_obj.playback_data1[user_obj.playback_index1];
-
-                    if (data1_.ts <= user_obj.curr_ms) {
+                    var data_temp = data1_.split(':');
+                    if (data_temp[1] <= user_obj.curr_ms) {
 //                        user_obj.socket.emit('new message', data1_.data);
-                        new_message( data1_.data);
+                        //new_message( data1_.data);
+                        _displayNewMsg(data_temp[3], data_temp[2]);
                     } else {
                         break;
                     }
@@ -409,13 +422,14 @@ function readFile(file, cb) {
 
     function Cbo_Complete(responseText, responseXML)
     {
-        cb(null, JSON.parse(responseText))
+        //cb(null, JSON.parse(responseText))
+        cb(null,responseText.split('\n'));
         //alert(responseText);
     }
 
     function Cbo_Error(status, statusText, responseText)
     {
-        cb(status, null)
+        cb(status, null);
         //alert(responseText);
     }
 
