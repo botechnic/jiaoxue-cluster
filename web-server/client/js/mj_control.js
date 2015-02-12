@@ -147,9 +147,11 @@ function mousemove_handler(msg) {
 }
 
 var delay_cmd = [];
+var is_delay = true;
 
 function delay_handler(cmd, msg) {
-	/*if(pageRendering) {
+	console.log('delay_handler', is_delay);
+	if(is_delay) {
 		var cmd_obj = {};
 		cmd_obj.cmd = cmd;
 		cmd_obj.msg = msg;
@@ -159,11 +161,19 @@ function delay_handler(cmd, msg) {
 		return true;
 	} else {
 		return false;
-	}*/
+	}
 	return false;
 }
 
+function reset_draw_ppt() {
+	is_delay = true;
+    delay_cmd = [];
+}
+
 function delay_dispatch() {
+	console.log('delay_dispatch');
+	is_delay = false;
+
 	for(var cmd_index in delay_cmd) {
 		var cmd_obj = delay_cmd[cmd_index];
 		switch(cmd_obj.cmd) {

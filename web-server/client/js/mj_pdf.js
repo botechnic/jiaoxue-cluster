@@ -24,14 +24,14 @@ function renderPage(num) {
 
 		renderTask.promise.then(function() {
 			pageRendering = false;
-			//delay_dispatch();
+			ctx.strokeStyle = "red";
+            ctx.lineWidth = 3;
+			delay_dispatch();
+
 			if (pageNumPending !== null) {
 				renderPage(pageNumPending);
 				pageNumPending = null;
 			}
-			ctx.strokeStyle = "red";
-			ctx.lineWidth = 3;
-
 		});
 	});
 

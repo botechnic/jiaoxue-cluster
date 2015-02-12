@@ -389,6 +389,8 @@ var control_pause_resume_playback = function() {
 var control_seek_playback = function(pos) {
     console.log('seek_playback', pos);
 
+    reset_draw_ppt();
+
     if(!user_obj.is_playback) {
         return;
     }
