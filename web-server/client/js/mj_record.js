@@ -23,6 +23,7 @@ function start_stop_record() {
 			pageNum : pageNum
 		});*/
 		send_message(global_info.course_id, "true", global_info.userid, "*", "record");
+		//send_message(global_info.course_id, ""+pageNum, global_info.userid, "*", "next");
 	} else {
 		start_stop_record.src = 'img/start_record.png';
 		is_record = false;

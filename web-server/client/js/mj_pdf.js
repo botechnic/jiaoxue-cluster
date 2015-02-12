@@ -24,6 +24,7 @@ function renderPage(num) {
 
 		renderTask.promise.then(function() {
 			pageRendering = false;
+			//delay_dispatch();
 			if (pageNumPending !== null) {
 				renderPage(pageNumPending);
 				pageNumPending = null;

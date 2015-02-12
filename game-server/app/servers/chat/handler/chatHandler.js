@@ -159,7 +159,7 @@ function record_data_0(app, msg, user_info) {
 
     var content = msg.cmd + ':' + curr_offset + ':'+ msg.content ;
     content = content.replace('\n','');
-    content = content +'\n'
+    content = content +'\n';
 
     writefile(fd,content);
 }
@@ -193,7 +193,7 @@ function record_data_1(app, msg, user_info,username) {
 
     var content = msg.cmd + ':' + curr_offset + ':'+ msg.content +':'+username;
     content = content.replace('\n','');
-    content = content +'\n'
+    content = content +'\n';
 
     writefile(fd,content);
 }

@@ -79,6 +79,11 @@ function next_handler(msg) {
 
 function mousedown_handler(msg) {
 	console.log('mousedown');
+
+	if(delay_handler('mousedown', msg)) {
+    	return;
+    }
+
 	var e = {};
 	var drawinfo = msg.split("|");
 	e.mouseX = parseInt(drawinfo[0]);
@@ -97,6 +102,11 @@ function mousedown_handler(msg) {
 
 function mouseup_handler(msg) {
 	console.log('mouseup');
+
+	if(delay_handler('mouseup', msg)) {
+    		return;
+    }
+
 	var e = {};
 	var drawinfo = msg.split("|");
 	e.mouseX = parseInt(drawinfo[0]);
@@ -112,6 +122,11 @@ function mouseup_handler(msg) {
 
 function mousemove_handler(msg) {
 	console.log('mousemove');
+
+	if(delay_handler('mousemove', msg)) {
+		return;
+	}
+
 	var e = {};
 	var drawinfo = msg.split("|");
 	e.mouseX = parseInt(drawinfo[0]);
@@ -129,6 +144,42 @@ function mousemove_handler(msg) {
 		ctx.lineTo(mouseX, mouseY);
 		ctx.stroke();
 	}
+}
+
+var delay_cmd = [];
+
+function delay_handler(cmd, msg) {
+	/*if(pageRendering) {
+		var cmd_obj = {};
+		cmd_obj.cmd = cmd;
+		cmd_obj.msg = msg;
+
+		delay_cmd.push(cmd_obj);
+
+		return true;
+	} else {
+		return false;
+	}*/
+	return false;
+}
+
+function delay_dispatch() {
+	for(var cmd_index in delay_cmd) {
+		var cmd_obj = delay_cmd[cmd_index];
+		switch(cmd_obj.cmd) {
+		case 'mousemove':
+			mousemove_handler(cmd_obj.msg);
+			break;
+		case 'mouseup':
+			mouseup_handler(cmd_obj.msg);
+			break;
+        case 'mousedown':
+			mousedown_handler(cmd_obj.msg);
+			break;
+		}
+	}
+
+	delay_cmd = [];
 }
 
 

@@ -19,6 +19,7 @@ var is_start_playback = false;
 var file_db = {};
 var course_cache = {};
 
+var video_duration = 0;
 var interval_ms = 40;
 var interval_handler = null;
 var interval_handler_client = null;
@@ -30,6 +31,7 @@ var interval_function_client = function () {
 			.toFixed(1);
 	var duration = Number(document.getElementById("video1").duration)
 			.toFixed(1);
+	video_duration = duration;
 	var whiteboard_container = document.getElementById('whiteboard_container');
 	document.getElementById("curr_pos").innerHTML = get_time_str(current_time);
 	document.getElementById("seek_bar_2").style.left = current_time / duration
@@ -79,15 +81,15 @@ MJ.playback.prototype.play_pause = function () {
 			 */
 			document.getElementById("video1").src = global_info.playback_addr;
 			document.getElementById("video1").pause();
-			document.getElementById("video1").play();
-			interval_handler_client = setInterval(interval_function_client, 1000);
 		} else {
 //			socket.emit('pause_resume_playback', {
 //				is_pause : is_pause
 //			});
             control_pause_resume_playback(is_pause,user_obj);
-			document.getElementById("video1").play();
 		}
+
+		document.getElementById("video1").play();
+		interval_handler_client = setInterval(interval_function_client, 1000);
 	}
 }
 
@@ -382,8 +384,11 @@ var control_start_playback = function(course_id,total,user_obj) {
         course_cache[course_id].playback_data = obj;
 
         if(obj.length > 0) {
-            total0_ms = obj[obj.length - 1].ts;
-        }
+            total0_ms = obj[obj.length - 2].split(':')[1];
+        }else{
+            total0_ms = 0;
+         }
+
 
         readFile(file1, function(err, obj) { // read file1
             if(err) {
@@ -392,8 +397,10 @@ var control_start_playback = function(course_id,total,user_obj) {
 
             course_cache[course_id].playback_data1 = obj;
 
-            if(obj.length > 0) {
-                total1_ms = obj[obj.length - 1].ts;
+            if(obj.length > 1) {
+                total1_ms = obj[obj.length - 2].split(':')[1];
+            }else{
+                total1_ms = 0;
             }
 
             course_cache[course_id].total_ms = total0_ms > total1_ms ? total0_ms : total1_ms;
@@ -487,8 +494,8 @@ var control_seek_playback = function(pos, user_obj) {
     var chat_ts = 0;
 
     for(var i=0; i < user_obj.playback_data.length; i++){
-        var ts = user_obj.playback_data[i].ts;
-        var type = user_obj.playback_data[i].type;
+        var ts = user_obj.playback_data[i].split(':')[1];
+        var type = user_obj.playback_data[i].split(':')[0];
 
         if(type === 'prev' || type === 'next') {
             old_ppt_index = i;
@@ -496,17 +503,17 @@ var control_seek_playback = function(pos, user_obj) {
 
         if(ts >= seek_pos){
             old_whiteboard_index = i;
-            whiteboard_ts = user_obj.playback_data[i].ts;
+            whiteboard_ts = user_obj.playback_data[i].split(':')[1];
             break;
         }
     }
 
     for(var i=0; i < user_obj.playback_data1.length; i++){
-        var ts = user_obj.playback_data1[i].ts;
+        var ts = user_obj.playback_data1[i].split(':')[1];
 
         if(ts >= seek_pos){
             old_chat_index = i;
-            chat_ts = user_obj.playback_data1[i].ts;
+            chat_ts = user_obj.playback_data1[i].split(':')[1];
             break;
         }
     }
@@ -516,6 +523,9 @@ var control_seek_playback = function(pos, user_obj) {
     user_obj.playback_index = old_ppt_index;
     user_obj.playback_index1 = old_chat_index;
     user_obj.is_playback = true;
+
+    document.getElementById('historyMsg').innerHTML = '';
+
 
 }
 
