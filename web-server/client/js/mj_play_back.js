@@ -6,27 +6,17 @@ var MJ = MJ || {};
 MJ.playback = MJ.playback || function(){};
 
 var is_pause = true;
-var usernames = {};
-var user_obj = {};
-user_obj.username = 's1';
-//user_obj.socket = socket;
-user_obj.course_id = 0;
-user_obj.is_pause = false;
-user_obj.role = 'student';
-usernames[user_obj.username] = user_obj;
+var user_obj = {username:'s1', course_id: 0, is_pause: false, role: 'student'};
 var is_start_playback = false;
-
-var file_db = {};
-var course_cache = {};
-
+//var file_info = {};
+//var course_cache = {};
 var video_duration = 0;
 var interval_ms = 40;
 var interval_handler = null;
-var interval_handler_client = null;
-
+var interval_handler_ui = null;
 var mj_ajax = new CallBackObject();
 
-var interval_function_client = function () {
+var interval_function_ui = function () {
 	var current_time = Number(document.getElementById("video1").currentTime)
 			.toFixed(1);
 	var duration = Number(document.getElementById("video1").duration)
@@ -38,8 +28,8 @@ var interval_function_client = function () {
 			* (whiteboard_container.clientWidth) + 'px';
 
 	if (document.getElementById("video1").ended) {
-		clearInterval(interval_handler_client);
-		interval_handler_client = null;
+		clearInterval(interval_handler_ui);
+		interval_handler_ui = null;
 		console.log('ended');
 
 		document.getElementById("seek_bar_2").style.left = 0 + 'px';
@@ -58,10 +48,8 @@ MJ.playback.prototype.play_pause = function () {
 	if (!is_pause) {
 		play_pause.src = 'img/play.png';
 		is_pause = true;
-        control_pause_resume_playback(is_pause,user_obj);
-//		socket.emit('pause_resume_playback', {
-//			is_pause : is_pause
-//		});*/
+        control_pause_resume_playback();
+
 		document.getElementById("video1").pause();
 	} else {
 
@@ -72,24 +60,17 @@ MJ.playback.prototype.play_pause = function () {
 		var seek_bar_value = seek_bar_ele.style.left;
 		console.log('seek_bar_left', seek_bar_value);
 		if (seek_bar_value === '0px') {
-
 			pageNum = 1;
 			queueRenderPage(pageNum);
 
-			/*
-			 * var pos = 0; socket.emit('seek_playback', { pos : pos });
-			 */
 			document.getElementById("video1").src = global_info.playback_addr;
 			document.getElementById("video1").pause();
 		} else {
-//			socket.emit('pause_resume_playback', {
-//				is_pause : is_pause
-//			});
-            control_pause_resume_playback(is_pause,user_obj);
+            control_pause_resume_playback();
 		}
 
 		document.getElementById("video1").play();
-		interval_handler_client = setInterval(interval_function_client, 1000);
+		interval_handler_ui = setInterval(interval_function_ui, 1000);
 	}
 }
 
@@ -97,7 +78,6 @@ MJ.playback.prototype.can_play = function () {
 	document.getElementById("range").innerHTML = get_time_str(Math.round(document
 			.getElementById("video1").duration));
 
-	// var volume = document.getElementById('video1').volume;
 	document.getElementById('video1').volume = playback_volume;
 
 	var volume_bar_bg = document.getElementById('volume_bar_bg');
@@ -112,11 +92,9 @@ MJ.playback.prototype.can_play = function () {
 	if (!is_start_playback) {
 		var total = (document.getElementById("video1").duration * 1000)
 				.toFixed(0);
-//		socket.emit('start_playback', {
-//			course_id : global_info.course_id,
-//			total : total
-//		});
-        control_start_playback( global_info.course_id,total,user_obj);
+
+        mj_playback.start_playback_server();
+        control_start_playback( global_info.course_id,total);
 		is_start_playback = true;
 	}
 }
@@ -149,10 +127,8 @@ MJ.playback.prototype.init_play_back = function () {
 					/ document.getElementById('whiteboard_container').clientWidth;
 			var pos = (total * bili).toFixed(0);
 			console.log('pos', pos);
-//			socket.emit('seek_playback', {
-//				pos : pos * 1000
-//			});
-            control_seek_playback(pos*1000,user_obj);
+
+            control_seek_playback(pos*1000);
 			document.getElementById("curr_pos").innerHTML = get_time_str(Number(pos));
 			document.getElementById("video1").currentTime = pos;
 		}
@@ -199,7 +175,6 @@ MJ.playback.prototype.init_play_back = function () {
 			} else if (global_info.biz_type === 'live') {
 				var player_id = document.getElementById('player_id');
 				player_id.set_volume(bili);
-				// console.log(total, seek_bar_bg_w, curr_x, bili, pos);
 				onActivityLevel(pos * 100);
 			}
 
@@ -220,111 +195,64 @@ MJ.playback.prototype.init_play_back = function () {
 //
 // server
 //
-MJ.playback.prototype.start_playback_server = function (usernames){
+MJ.playback.prototype.start_playback_server = function (){
     var interval_function = function() {
-        for ( var key in usernames) {
-            var user_obj = usernames[key];
 
-            if (user_obj.is_playback && !user_obj.is_pause) {
-                user_obj.curr_ms += interval_ms;
+        if (user_obj.is_playback && !user_obj.is_pause) {
+            user_obj.curr_ms += interval_ms;
 
-                for (; user_obj.playback_index < user_obj.playback_data.length; user_obj.playback_index++) {
-                    var data_ = user_obj.playback_data[user_obj.playback_index];
+            for (; user_obj.playback_index < user_obj.playback_data.length; user_obj.playback_index++) {
+                var data_ = user_obj.playback_data[user_obj.playback_index];
 
-                    var data_temp = data_.split(':');
+                var data_temp = data_.split(':');
 
-                    // console.log(data_.ts, user_obj.curr_ms);
-                    if (data_temp[1] <= user_obj.curr_ms) {
-                        switch (data_temp[0]){
-                            case "prev":
-                                prev_handler(data_temp[2]);
-                                break;
-                            case "next":
-                                next_handler(data_temp[2]);
-                                break;
-                            case "mousemove":
-                                mousemove_handler(data_temp[2]);
-                                break;
-                            case "mouseup":
-                                mouseup_handler(data_temp[2]);
-                                break;
-                            case "mousedown":
-                                mousedown_handler(data_temp[2]);
-                                break;
-                        }
-//                        user_obj.socket.emit(data_.type, data_.data);
-                    } else {
-                        break;
+                if (data_temp[1] <= user_obj.curr_ms) {
+                    switch (data_temp[0]){
+                        case "prev":
+                            prev_handler(data_temp[2]);
+                            break;
+                        case "next":
+                            next_handler(data_temp[2]);
+                            break;
+                        case "mousemove":
+                            mousemove_handler(data_temp[2]);
+                            break;
+                        case "mouseup":
+                            mouseup_handler(data_temp[2]);
+                            break;
+                        case "mousedown":
+                            mousedown_handler(data_temp[2]);
+                            break;
                     }
+                } else {
+                    break;
                 }
+            }
 
-                for (; user_obj.playback_index1 < user_obj.playback_data1.length; user_obj.playback_index1++) {
-                    var data1_ = user_obj.playback_data1[user_obj.playback_index1];
-                    var data_temp = data1_.split(':');
-                    if (data_temp[1] <= user_obj.curr_ms) {
-//                        user_obj.socket.emit('new message', data1_.data);
-                        //new_message( data1_.data);
-                        _displayNewMsg(data_temp[3], data_temp[2]);
-                    } else {
-                        break;
-                    }
+            for (; user_obj.playback_index1 < user_obj.playback_data1.length; user_obj.playback_index1++) {
+                var data1_ = user_obj.playback_data1[user_obj.playback_index1];
+                var data_temp = data1_.split(':');
+                if (data_temp[1] <= user_obj.curr_ms) {
+                    _displayNewMsg(data_temp[3], data_temp[2]);
+                } else {
+                    break;
                 }
+            }
 
-                if (user_obj.curr_ms >= user_obj.total_ms) {
-                    user_obj.is_playback = false;
-                    user_obj.playback_index = 0;
-                    user_obj.playback_index1 = 0;
-                    user_obj.curr_ms = 0;
-                }
+            if (user_obj.curr_ms >= user_obj.total_ms) {
+                user_obj.is_playback = false;
+                user_obj.playback_index = 0;
+                user_obj.playback_index1 = 0;
+                user_obj.curr_ms = 0;
+            }
 
-            } // if
-        } // for
+        } // if
     };
 
     if (interval_handler == null) {
         interval_handler = setInterval(interval_function, interval_ms);
     }
 }
-
-var new_message = function(e){
-    console.log('new message');
-    _displayNewMsg(e.username, e.message);
-}
-var prev = function(e){
-    console.log('prev', e.pageNum);
-    var pageNum = e.pageNum;
-    queueRenderPage(pageNum);
-}
-var next = function(e){
-    console.log('next', e.pageNum);
-    var pageNum = e.pageNum;
-    queueRenderPage(pageNum);
-}
-
-var mousedown = function(e){
-    console.log('mousedown');
-    pp = true;
-    var mouseX = e.mouseX;
-    var mouseY = e.mouseY;
-    ctx.moveTo(mouseX, mouseY);
-}
-
-var mouseup = function(e){
-    console.log('mouseup');
-    pp = e.pp;
-}
-
-var mousemove = function(e){
-    console.log('mousemove');
-    var mouseX = e.mouseX;
-    var mouseY = e.mouseY;
-    pp = e.pp;
-    if (pp) {
-        ctx.lineTo(mouseX, mouseY);
-        ctx.stroke();
-    }
-}
-
 
 var stop_playback_server = function () {
     if (interval_handler != null) {
@@ -333,14 +261,10 @@ var stop_playback_server = function () {
     }
 }
 
-var control_start_playback = function(course_id,total,user_obj) {
+var control_start_playback = function(course_id,total) {
 
     console.log('start_playback', course_id);
-    var user_obj =user_obj;
-
-    if(user_obj === undefined) {
-        return ;
-    }
+    document.getElementById('historyMsg').innerHTML = '';
 
     user_obj.playback_index = 0;
     user_obj.playback_index1 = 0;
@@ -349,29 +273,28 @@ var control_start_playback = function(course_id,total,user_obj) {
 
     var course_id = user_obj.course_id;
 
-    if(course_cache[course_id] !== undefined) {
-        user_obj.playback_data = course_cache[course_id].playback_data;
-        user_obj.playback_data1 = course_cache[course_id].playback_data1;
-        user_obj.total_ms = course_cache[course_id].total_ms;
+    if(user_obj.playback_data !== undefined) {
+        /*user_obj.playback_data = course_cache.playback_data;
+        user_obj.playback_data1 = course_cache.playback_data1;
+        user_obj.total_ms = course_cache.total_ms;*/
         user_obj.is_playback = true;
         user_obj.is_pause = false;
         return;
     }
 
-    file_db[course_id] = {};
     var path = "data/" + course_id ;
-    file_db[course_id].file = path + '/' +course_id + '_0.json';
-    file_db[course_id].file1 = path + '/' +course_id + '_1.json';
-    file_db[course_id].file2 = path + '/' +course_id + '_2.mp4';
+    user_obj.file = path + '/' +course_id + '_0.json';
+    user_obj.file1 = path + '/' +course_id + '_1.json';
+    user_obj.file2 = path + '/' +course_id + '_2.mp4';
 
     // if no cache
-    course_cache[course_id] = {};
+    //course_cache = {};
     var total0_ms = 0;
     var total1_ms = 0;
     var total2_ms = total;
-    var file = file_db[course_id].file;
-    var file1 = file_db[course_id].file1;
-    var file2 = file_db[course_id].file2;
+    var file = user_obj.file;
+    var file1 = user_obj.file1;
+    var file2 = user_obj.file2;
 
     console.log('readfile', file);
     console.log('readfile1', file1);
@@ -381,21 +304,20 @@ var control_start_playback = function(course_id,total,user_obj) {
             return;
         }
 
-        course_cache[course_id].playback_data = obj;
+        user_obj.playback_data = obj;
 
         if(obj.length > 0) {
             total0_ms = obj[obj.length - 2].split(':')[1];
         }else{
             total0_ms = 0;
-         }
-
+        }
 
         readFile(file1, function(err, obj) { // read file1
             if(err) {
                 return;
             }
 
-            course_cache[course_id].playback_data1 = obj;
+            user_obj.playback_data1 = obj;
 
             if(obj.length > 1) {
                 total1_ms = obj[obj.length - 2].split(':')[1];
@@ -403,12 +325,12 @@ var control_start_playback = function(course_id,total,user_obj) {
                 total1_ms = 0;
             }
 
-            course_cache[course_id].total_ms = total0_ms > total1_ms ? total0_ms : total1_ms;
-            course_cache[course_id].total_ms = total2_ms > course_cache[course_id].total_ms ? total2_ms : course_cache[course_id].total_ms;
+            user_obj.total_ms = total0_ms > total1_ms ? total0_ms : total1_ms;
+            user_obj.total_ms = total2_ms > user_obj.total_ms ? total2_ms : user_obj.total_ms;
 
-            user_obj.playback_data = course_cache[course_id].playback_data;
-            user_obj.playback_data1 = course_cache[course_id].playback_data1;
-            user_obj.total_ms = course_cache[course_id].total_ms;
+            /*user_obj.playback_data = course_cache.playback_data;
+            user_obj.playback_data1 = course_cache.playback_data1;
+            user_obj.total_ms = course_cache.total_ms;*/
             user_obj.is_playback = true;
             user_obj.is_pause = false;
 
@@ -420,7 +342,6 @@ var control_start_playback = function(course_id,total,user_obj) {
 function readFile(file, cb) {
     function createRequest()
     {
-        //var name = escape(document.getElementById("name").value);
         var cbo = new CallBackObject();
         cbo.OnComplete = Cbo_Complete;
         cbo.onError = Cbo_Error;
@@ -429,15 +350,12 @@ function readFile(file, cb) {
 
     function Cbo_Complete(responseText, responseXML)
     {
-        //cb(null, JSON.parse(responseText))
         cb(null,responseText.split('\n'));
-        //alert(responseText);
     }
 
     function Cbo_Error(status, statusText, responseText)
     {
         cb(status, null);
-        //alert(responseText);
     }
 
     createRequest();
@@ -460,77 +378,71 @@ function readFile(file, cb) {
 
 }*/
 
-var control_pause_resume_playback = function(is_pause, user_obj) {
+var control_pause_resume_playback = function() {
 
-    console.log('pause_resume_playback', is_pause);
-    var is_pause = is_pause;
-    var user_obj = user_obj;
-
-    if(user_obj === undefined) {
-        return;
-    }
+    console.log('pause_resume_playback', user_obj.is_pause);
 
     user_obj.is_pause = is_pause;
 
 }
 
-var control_seek_playback = function(pos, user_obj) {
-
+var control_seek_playback = function(pos) {
     console.log('seek_playback', pos);
-    var user_obj = user_obj;
 
-    if(user_obj === undefined || !user_obj.is_playback) {
+    if(!user_obj.is_playback) {
         return;
     }
 
     user_obj.is_playback = false;
 
     var seek_pos = parseInt(pos);
-    //console.log('seek_pos', seek_pos);
-    var old_ppt_index = 0;
-    var old_whiteboard_index = 0;
+    var ppt_index = 0;
+    var whiteboard_index = 0;
     var whiteboard_ts = 0;
-    var old_chat_index = 0;
+
+    var chat_index = 0;
     var chat_ts = 0;
 
     for(var i=0; i < user_obj.playback_data.length; i++){
-        var ts = user_obj.playback_data[i].split(':')[1];
-        var type = user_obj.playback_data[i].split(':')[0];
-
-        if(type === 'prev' || type === 'next') {
-            old_ppt_index = i;
-        }
+        var playback_data = user_obj.playback_data[i].split(':');
+        var type = playback_data[0];
+        var ts = playback_data[1];
 
         if(ts >= seek_pos){
-            old_whiteboard_index = i;
-            whiteboard_ts = user_obj.playback_data[i].split(':')[1];
+            whiteboard_index = i;
+            whiteboard_ts = ts;
             break;
+        }
+
+        if(type === 'prev' || type === 'next') {
+            ppt_index = i;
+            console.log('type:', type, 'ppt_index:', ppt_index);
         }
     }
 
     for(var i=0; i < user_obj.playback_data1.length; i++){
-        var ts = user_obj.playback_data1[i].split(':')[1];
+        var playback_data1 = user_obj.playback_data1[i].split(':');
+        var ts = playback_data1[1];
 
         if(ts >= seek_pos){
-            old_chat_index = i;
-            chat_ts = user_obj.playback_data1[i].split(':')[1];
+            chat_index = i;
+            chat_ts = ts;
             break;
         }
     }
 
-    //user_obj.curr_ms = whiteboard_ts > chat_ts ? whiteboard_ts : chat_ts;
+    console.log('ppt_index:', ppt_index, 'whiteboard_index:', whiteboard_index, 'chat_index:', chat_index);
+
     user_obj.curr_ms = seek_pos;
-    user_obj.playback_index = old_ppt_index;
-    user_obj.playback_index1 = old_chat_index;
+    user_obj.playback_index = ppt_index;
+    user_obj.playback_index1 = chat_index;
     user_obj.is_playback = true;
 
     document.getElementById('historyMsg').innerHTML = '';
-
-
 }
 
 
 var mj_playback = new MJ.playback();
 
 mj_playback.init_play_back();
-mj_playback.start_playback_server(usernames);
+

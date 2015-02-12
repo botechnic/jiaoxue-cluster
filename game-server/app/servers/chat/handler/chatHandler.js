@@ -101,6 +101,8 @@ function record_start(app, key) {
 
     user_info.base_timestamp = new Date().getTime();
 	user_info.is_recording = true;
+	user_info.username = key;
+
 	app.set(key, user_info);
 }
 
@@ -141,6 +143,11 @@ function record_data_0_start(app, user_info) {
             console.log('open file error:',err);
         }
         user_info.fd0 = fd0;
+
+        var msg_ = {};
+        msg_.cmd = 'next';
+        msg_.content = '1';
+        record_data_0(app, msg_, user_info);
     })
 }
 
