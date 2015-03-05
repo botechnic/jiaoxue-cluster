@@ -26,7 +26,8 @@ function connect_gate(uid, callback){
 
     var route = 'gate.gateHandler.queryEntry';
 	pomelo.init({
-		host: window.location.hostname,
+		//host: window.location.hostname,
+		host: 'pano.botechnic.com',
 		port: 3014,
 		log: true
 	}, function() {
