@@ -34,6 +34,8 @@ app.configure('production|development', function() {
 	app.filter(pomelo.timeout());
 });
 
+//app.enable('systemMonitor');
+
 // start app
 app.start();
 
